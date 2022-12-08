@@ -12,9 +12,11 @@
     'website': "https://m22.mx",
     'category': 'Sales',
     'version': '16.0.1',
-    'depends': ['base','product','stock','report_xlsx'],
+    'depends': ['base','product','stock','report_xlsx','sale'],
     'data': [
-        'reports/product_pricelist_report_xlsx.xml'
+        'security/ir.model.access.csv',
+        'reports/product_pricelist_report_xlsx.xml',
+        'wizard/product_pricelist_report_wizard.xml'
     ],
     'license': 'AGPL-3'
 }
