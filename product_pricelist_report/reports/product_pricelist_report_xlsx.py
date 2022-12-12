@@ -21,6 +21,7 @@ class ProductPricelistReportXLSX(models.AbstractModel):
         sheet = workbook.add_worksheet('Reporte')
         header_columns_format = workbook.add_format({'font_size': 11, 'align': 'left', 'bg_color': '#213E8B', 'font_color': 'white', 'border': 1})
         header_columns_format.set_align("vcenter")
+        merge_format = workbook.add_format({'bold': 1,'align': 'center','valign': 'vcenter', 'font_size': 20, 'font_color': 'gray', 'font_name': 'Broadway'})
 
         # Anchura de columnas
         sheet.set_column(0, 0, 17)
@@ -52,15 +53,18 @@ class ProductPricelistReportXLSX(models.AbstractModel):
         attribute_columns = attribute_ids.mapped("name")
         columns = ["Descripción", "Nombre"] + pricelist_columns + ["Colores Disp. Variantes"] + attribute_columns
         # Se obtiene el logo de la empresa para colocarlo en el excel
-        if self.env.company.logo:
-            image_width = 140.0
-            image_height = 182.0
-            cell_width = 100
-            cell_height = 150
-            x_scale = cell_width / image_width
-            y_scale = cell_height / image_height
-            company_image = io.BytesIO(base64.b64decode(self.env.company.logo))
-            sheet.insert_image(0, 0, "image.png", {'image_data': company_image, 'object_position': 2, 'x_scale': x_scale, 'y_scale': y_scale})
+        sheet.merge_range("A1:A3", "VALTA", merge_format)
+
+
+        # if self.env.company.logo:
+        #     image_width = 140.0
+        #     image_height = 182.0
+        #     cell_width = 100
+        #     cell_height = 150
+        #     x_scale = cell_width / image_width
+        #     y_scale = cell_height / image_height
+        #     company_image = io.BytesIO(base64.b64decode(self.env.company.logo))
+        #     sheet.insert_image(0, 0, "image.png", {'image_data': company_image, 'object_position': 2, 'x_scale': x_scale, 'y_scale': y_scale})
         # Se colocan dinamicamente las listas
         for column in range(len(columns)):
             sheet.write(f'{alphabet[column].upper()}4', ''.join([i for i in columns[column] if not i.isdigit()]), header_columns_format)
