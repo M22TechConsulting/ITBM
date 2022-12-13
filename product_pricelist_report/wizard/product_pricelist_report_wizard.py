@@ -8,7 +8,7 @@ class ProductPricelistReportWizard(models.TransientModel):
 
     name = fields.Char(string="Nombre", default="Reporte de lista de precios")
     product_ids = fields.Many2many(comodel_name="product.template", string="Productos")
-    pricelist_ids = fields.Many2many(comodel_name="product.pricelist", string="Lista de precios")
+    pricelist_ids = fields.Many2many(comodel_name="product.pricelist", string="Lsta de precios")
     company_id = fields.Many2one(comodel_name="res.company", string="Compañía", default=lambda self: self.env.company)
     attribute_ids = fields.Many2many(comodel_name="product.attribute", string="Atributos")
 
