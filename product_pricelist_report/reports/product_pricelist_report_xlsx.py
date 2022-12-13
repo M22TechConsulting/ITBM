@@ -73,7 +73,7 @@ class ProductPricelistReportXLSX(models.AbstractModel):
         index = 0
         # Se escribe en las celdas los valores
         for line in lines:
-            sheet.write(f'{alphabet[index + 1].upper()}{row}', line.name)
+            sheet.write(f'{alphabet[index].upper()}{row}', line.name)
             columns_count = 1
             for pricelist in pricelist_ids.mapped("pricelist_id"):
                 price_ids = pricelist.item_ids.filtered(lambda price: price.product_tmpl_id.id == line.id and price.fixed_price > 0)
