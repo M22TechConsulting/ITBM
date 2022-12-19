@@ -1,0 +1,5 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_product_guarantee_portal,product_guarantee_portal,model_product_guarantee,base.group_portal,1,1,1,1
+access_product_guarantee,product_guarantee,model_product_guarantee,base.group_user,1,1,1,1
+access_product_accessories,product_accessories,model_product_accessories,base.group_user,1,1,1,1
+access_product_guarantee_shipping_supplier,product_guarantee_shipping_supplier,model_product_guarantee_shipping_supplier,base.group_user,1,1,1,1

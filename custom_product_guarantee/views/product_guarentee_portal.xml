@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <template id="portal_my_home_menu_guarantee" name="Portal layout : Garantias"
+                  inherit_id="portal.portal_breadcrumbs">
+            <xpath expr="//ol[hasclass('o_portal_submenu')]" position="inside">
+                <li t-if="page_name == 'guarantee' or event"
+                    t-attf-class="breadcrumb-item #{'active ' if not event else ''}">
+                    <a t-if="event" t-attf-href="/my/guarantee?{{ keep_query() }}">Garantías</a>
+                    <t t-else="">Garantía</t>
+                </li>
+                <li t-if="event" class="breadcrumb-item active">
+                    <span t-field="event.name"/>
+                </li>
+            </xpath>
+        </template>
+
+
+        <template id="product_guarantee_portal" name="Garantías" customize_show="True"
+                  inherit_id="portal.portal_my_home" priority="100">
+            <xpath expr="//div[hasclass('o_portal_docs')]" position="inside">
+                <t t-call="portal.portal_docs_entry">
+                    <t t-set="title">Garantias</t>
+                    <t t-set="url" t-value="'/my/guarantee'"/>
+                    <t t-set="placeholder_count" t-value="'guarantee_count'"/>
+                </t>
+            </xpath>
+        </template>
+
+        <template id="portal_my_guarantee" name="Mis garantías">
+            <t t-call="portal.portal_layout">
+                <t t-set="breadcrumbs_searchbar" t-value="True"/>
+                <t t-call="portal.portal_searchbar">
+                    <t t-set="title">Garantías</t>
+                </t>
+                <t t-if="not guarantee_ids">
+                    <div class="alert alert-warning mt8" role="alert">
+                        <p class="mb-0">Actualmente no hay garantias registradas.</p>
+                    </div>
+                </t>
+                <t t-if="guarantee_ids" t-call="portal.portal_table">
+                    <t t-set="guarantee_ids" t-value="grouped_guarantee or guarantee_ids"/>
+                    <thead>
+                        <tr>
+                            <th>Ticket</th>
+                            <th class="text-end">IMEI</th>
+                            <th class="text-end">Fecha</th>
+                            <th class="text-end">Producto</th>
+                        </tr>
+                    </thead>
+                    <t t-foreach="guarantee_ids" t-as="l">
+                        <tbody t-if="grouped_guarantee and not groupby == 'none'">
+                            <t t-set="groupby_record" t-value="l[0]"/>
+                            <t t-set="l" t-value="l[1]"/>
+                            <tr class="table-light">
+                                <th>
+                                    <em class="fw-normal text-muted">Garantías por <t
+                                            t-out="searchbar_groupby[groupby]['label']"/>:</em>
+                                    <span t-field="groupby_record.product_id"/>
+                                </th>
+                                <th class="text-end">
+                                    Total: <span class="text-muted" t-out="len(l)"/>
+                                </th>
+                            </tr>
+                        </tbody>
+
+                        <tbody>
+                            <t t-foreach="l" t-as="guarantee">
+                                <tr>
+                                    <td class="text-start"><a t-attf-href="/helpdesk/ticket/#{guarantee.ticket_id.id}"><small>#</small><t t-out="guarantee.ticket_id.id"/><span class="ms-2" t-field="guarantee.ticket_id.name"/></a></td>
+                                    <td class="text-end"><span t-field="guarantee.lot_id"/></td>
+                                    <td class="text-end"><span t-field="guarantee.date"/></td>
+                                    <td class="text-end"><span t-field="guarantee.product_id"/></td>
+                                    <td t-if="groupby != 'stage'" class="text-end">
+                                        <span t-attf-class="badge rounded-pill #{'text-bg-info' if guarantee.ticket_id.stage_id.fold else 'text-bg-light'}" t-esc="guarantee.ticket_id.stage_id.name"/>
+                                    </td>
+                                </tr>
+                            </t>
+                        </tbody>
+
+                    </t>
+                </t>
+            </t>
+        </template>
+
+
+    </data>
+</odoo>

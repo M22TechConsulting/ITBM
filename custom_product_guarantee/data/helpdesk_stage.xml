@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="product_guarantee_helpdesk_new_stage" model="helpdesk.stage" >
+           <field name="name">Nuevo</field>
+           <field name="team_ids" eval="[(4, ref('custom_product_guarantee.product_guarantee_helpdesk_team'))]"/>
+           <field name="sequence">19</field>
+       </record>
+
+       <record id="product_guarantee_helpdesk_validate_stage" model="helpdesk.stage" >
+           <field name="name">Validación</field>
+           <field name="team_ids" eval="[(4, ref('custom_product_guarantee.product_guarantee_helpdesk_team'))]"/>
+           <field name="sequence">20</field>
+       </record>
+
+        <record id="product_guarantee_helpdesk_supplier_stage" model="helpdesk.stage" >
+           <field name="name">Garantía proveedor</field>
+           <field name="team_ids" eval="[(4, ref('custom_product_guarantee.product_guarantee_helpdesk_team'))]"/>
+           <field name="sequence">21</field>
+       </record>
+
+        <record id="product_guarantee_helpdesk_shipping_stage" model="helpdesk.stage" >
+           <field name="name">Enviado</field>
+           <field name="team_ids" eval="[(4, ref('custom_product_guarantee.product_guarantee_helpdesk_team'))]"/>
+           <field name="sequence">22</field>
+       </record>
+
+        <record id="product_guarantee_helpdesk_done_stage" model="helpdesk.stage" >
+           <field name="name">Resuelto</field>
+           <field name="team_ids" eval="[(4, ref('custom_product_guarantee.product_guarantee_helpdesk_team'))]"/>
+           <field name="sequence">23</field>
+       </record>
+
+    </data>
+</odoo>

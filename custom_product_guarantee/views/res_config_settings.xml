@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="res_config_settings_res_partner_macola" model="ir.ui.view">
+            <field name="name">res.config.settings.res.partner.macola</field>
+            <field name="model">res.config.settings</field>
+            <field name="inherit_id" ref="website.res_config_settings_view_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//div[@id='website_settings']" position="after">
+                    <h2>Garantías</h2>
+                    <div class="row mt16 o_settings_container" id="website_guarantee"
+                         attrs="{'invisible': [('website_id', '=', False)]}">
+                        <div class="col-12 col-lg-6 o_setting_box" id="guarantee_picking_type_id">
+                            <div class="o_setting_right_pane">
+                                <span class="o_form_label">Operación de recepción de garantías</span>
+                                <div class="text-muted">
+                                    Operación de recepción <strong>garantías</strong>
+                                </div>
+                                <div class="text-muted">
+                                    <field name="x_guarantee_picking_type_in_id" domain="[('code','=','incoming')]"
+                                           options="{'no_edit': True, 'no_create': True}"/>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-12 col-lg-6 o_setting_box" id="guarantee_picking_type_out_id">
+                            <div class="o_setting_right_pane">
+                                <span class="o_form_label">Operación de entrega de garantías</span>
+                                <div class="text-muted">
+                                    Operación de entrega <strong>garantías</strong>
+                                </div>
+                                <div class="text-muted">
+                                    <field name="x_guarantee_picking_type_out_id" domain="[('code','=','outgoing')]"
+                                           options="{'no_edit': True, 'no_create': True}"/>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-12 col-lg-6 o_setting_box" id="guarantee_picking_type_out_supplier_id">
+                            <div class="o_setting_right_pane">
+                                <span class="o_form_label">Operación de entrega de garantías a proveedor</span>
+                                <div class="text-muted">
+                                    Operación de entrega a proveedor <strong>garantías</strong>
+                                </div>
+                                <div class="text-muted">
+                                    <field name="x_guarantee_picking_type_out_supplier_id" domain="[('code','=','outgoing')]"
+                                           options="{'no_edit': True, 'no_create': True}"/>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

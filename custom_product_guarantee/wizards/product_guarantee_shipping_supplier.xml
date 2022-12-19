@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="product_guarantee_shipping_supplier_view_form" model="ir.ui.view">
+            <field name="name">product_guarantee_shipping_supplier_view_form</field>
+            <field name="model">product.guarantee.shipping.supplier</field>
+            <field name="arch" type="xml">
+                <form string="Garantía a proveedor">
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="partner_id" options="{'no_create':True}"/>
+                            </group>
+                            <group>
+                                <field name="ticket_id" readonly="1"/>
+                            </group>
+
+                        </group>
+                    </sheet>
+                    <footer>
+                        <button name="create_supplier_guarantee" string="Enaviar a proveedor" class="btn btn-primary" type="object"/>
+                        <button special="cancel" string="Cerrar" class="btn btn-secondary" type="object"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+    </data>
+</odoo>
